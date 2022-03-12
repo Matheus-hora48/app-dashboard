@@ -1,9 +1,10 @@
 $(document).ready(() => {
   
   //reload da pagina inicial
-  $('#inicio').click(function() {
-    location.reload();
-  }); 
+  $('#principal').on('click', () => {
+    $('#pagina').load('pr.html')
+  })
+
 
 	$('#documentacao').on('click', ()=>{
     $('#pagina').load('documentacao.html')
@@ -32,7 +33,7 @@ $(document).ready(() => {
         $('#despesa').html(dados.total_despesas)
         $('#reclamacao').html(dados.total_reclamacao)
         $('#elogios').html(dados.total_elogios)
-        $('#sugestao').html(dados.total_sugestao)
+        $('#sugestao').html(dados.total_sugestoes)
         
 
         console.log(dados)

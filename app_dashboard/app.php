@@ -7,8 +7,11 @@ class Dashboard
   public $data_fim;
   public $num_vendas;
   public $total_vendas;
-  public $clientes_ativos;
-  public $clientes_inativos;
+  public $total_ativos;
+  public $total_inativo;
+  public $total_reclamacao;
+  public $total_elogios;
+  public $total_sugestoes;
 
 
   public function __get($atributo)
@@ -152,6 +155,32 @@ class Bd
 
     return $stmt->fetch(PDO::FETCH_OBJ)->total_reclamacao;
   }
+
+  //Elogios
+  public function getElogios()
+  {
+    $query = '
+    select COUNT(tipo_contato) as total_elogios from tb_contatos WHERE tipo_contato = 1
+    ';
+
+    $stmt = $this->conexao->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_OBJ)->total_elogios;
+  }
+
+  //Sugestões
+  public function getSugestoes()
+  {
+    $query = '
+    select COUNT(tipo_contato) as total_sugestoes from tb_contatos WHERE tipo_contato = 2
+    ';
+
+    $stmt = $this->conexao->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_OBJ)->total_sugestoes;
+  }
 }
 
 
@@ -178,5 +207,8 @@ $dashboard->__set('total_ativos', $bd->getClientesAtivos());
 $dashboard->__set('total_inativos', $bd->getClientesInativos());
 $dashboard->__set('total_despesas', $bd->getDespesas());
 $dashboard->__set('total_reclamacao', $bd->getReclamacao());
+$dashboard->__set('total_elogios', $bd->getElogios());
+$dashboard->__set('total_sugestoes', $bd->getSugestoes());
+
 //print_r($dashboard);
 echo json_encode($dashboard);
