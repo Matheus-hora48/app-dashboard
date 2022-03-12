@@ -1,5 +1,10 @@
 $(document).ready(() => {
   
+  //reload da pagina inicial
+  $('#inicio').click(function() {
+    location.reload();
+  }); 
+
 	$('#documentacao').on('click', ()=>{
     $('#pagina').load('documentacao.html')
   })
@@ -25,6 +30,10 @@ $(document).ready(() => {
         $('#clientesAtivos').html(dados.total_ativos)
         $('#clientesInativos').html(dados.total_inativos)
         $('#despesa').html(dados.total_despesas)
+        $('#reclamacao').html(dados.total_reclamacao)
+        $('#elogios').html(dados.total_elogios)
+        $('#sugestao').html(dados.total_sugestao)
+        
 
         console.log(dados)
       },

@@ -139,6 +139,19 @@ class Bd
 
     return $stmt->fetch(PDO::FETCH_OBJ)->total_despesas;
   }
+
+  //Reclamação
+  public function getReclamacao()
+  {
+    $query = '
+    select COUNT(tipo_contato) as total_reclamacao from tb_contatos WHERE tipo_contato = 3
+    ';
+
+    $stmt = $this->conexao->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_OBJ)->total_reclamacao;
+  }
 }
 
 
@@ -164,5 +177,6 @@ $dashboard->__set('total_vendas', $bd->getTotalVendas());
 $dashboard->__set('total_ativos', $bd->getClientesAtivos());
 $dashboard->__set('total_inativos', $bd->getClientesInativos());
 $dashboard->__set('total_despesas', $bd->getDespesas());
+$dashboard->__set('total_reclamacao', $bd->getReclamacao());
 //print_r($dashboard);
 echo json_encode($dashboard);
